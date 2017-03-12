@@ -41,7 +41,7 @@ console.log(`Web Server running on port ${process.env.PORT}` );
 app.get('/', function (request, response) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
-      client.query('SELECT * FROM MENU', function(err, result) {
+      client.query('SELECT * FROM "MENU"', function(err, result) {
       done();
 
       //console.log(result.rows[0]);
