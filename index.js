@@ -59,7 +59,7 @@ if (!request.body) return response.sendStatus(400)
 
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
-      client.query('SELECT * FROM "USER" WHERE username ='+ request.body.username+' and password = '+request.body.password, function(err, result) {
+      client.query('SELECT * FROM "USER" WHERE user_name ='+ request.body.username+' and password = '+request.body.password, function(err, result) {
       done();
 
       //console.log(result.rows[0]);
