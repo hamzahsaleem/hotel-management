@@ -135,7 +135,7 @@
                            
                         <% menu.forEach(function(item){ %>
 
-                        <%if(item=='Breakfast'){ %>
+                        <%if(item.type='Breakfast'){ %>
 
                         <tr>
                             <td><%=item.dish %></td>
@@ -165,7 +165,7 @@
                            
                         <% menu.forEach(function(item){ %>
 
-                        <%if(item=='Lunch'){ %>
+                        <%if(item.type=='Lunch'){ %>
 
                         <tr>
                             <td><%=item.dish %></td>
@@ -195,7 +195,7 @@
                            
                         <% menu.forEach(function(item){ %>
 
-                        <%if(item=='Dinner'){ %>
+                        <%if(item.type=='Dinner'){ %>
 
                         <tr>
                             <td><%=item.dish %></td>
