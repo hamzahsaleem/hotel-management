@@ -55,7 +55,7 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav">
                     <li>
-                        <a href="index.html">Home</a>
+                        <a href="index.ejs">Home</a>
                     </li>
                     <li>
                         <a href="about.html">About</a>
@@ -132,30 +132,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>Google</td>
-                                <td>9518</td>
-                            </tr>
-                            <tr>
-                                <td>Twitter</td>
-                                <td>7326</td>
-                            </tr>
-                            <tr>
-                                <td>Amazon</td>
-                                <td>4162</td>
-                            </tr>
+                           
+                        <% menu.forEach(function(item){ %>
+
                         <tr>
-                                <td>LinkedIn</td>
-                                <td>3654</td>
-                            </tr>
-                        <tr>
-                                <td>CodePen</td>
-                                <td>2002</td>
-                            </tr>
-                        <tr>
-                                <td>GitHub</td>
-                                <td>4623</td>
-                            </tr>
+                            <td><%=item.dish %></td>
+                            <td><%=item.price %></td>
+                        </tr>
+
+
+
+                        <% }) %>
+
                         </tbody>
                     </table>
 
