@@ -68,7 +68,31 @@ if (!request.body) return response.sendStatus(400)
        { console.error(err); response.send("Error " + err); }
       else
        { //response.render('index', {menu: result.rows} );
-           response.send(result.rows[0]);
+         
+        if(result.rowCount == 1)
+            {
+                 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      
+                client.query('SELECT * FROM "MENU"', function(err, result) {
+                done();
+
+                //console.log(result.rows[0]);
+
+                    if (err)
+                    { console.error(err); response.send("Error " + err); }
+                    else
+                    { response.render('edit_menu', {menu: result.rows} ); }
+                    });
+                });
+
+            } else {
+
+                    return response.redirect("/login");
+
+            }
+
+
+
 
         }
     });
