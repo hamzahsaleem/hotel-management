@@ -6,7 +6,7 @@ const fs = require('fs');
 const configJson = fs.readFileSync('./config.json');
 const config = JSON.parse(configJson);
 const bodyParser= require('body-parser')
-
+const pg = require('pg');
 
 //module export
 //const firstMod = require('./first-module');
