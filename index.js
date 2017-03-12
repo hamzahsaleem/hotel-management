@@ -21,7 +21,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 
 const httpServer = http.createServer(app);
 
-httpServer.listen(config.webServer.port,function(err){
+httpServer.listen(process.env.PORT || config.webServer.port,function(err){
 
     if(err)
     {
@@ -30,7 +30,7 @@ httpServer.listen(config.webServer.port,function(err){
 
     }
 
-console.log(`Web Server running on port ${config.webServer.port}` );
+console.log(`Web Server running on port ${process.env.PORT}` );
 
 
 });
