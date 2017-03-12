@@ -1,0 +1,8 @@
+{
+    "webServer": {
+        "folder": "www",
+        "port": 3000
+
+    }
+
+}
