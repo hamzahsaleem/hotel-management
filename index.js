@@ -45,13 +45,16 @@ app.get('/',function(req,res){
 
 app.get('/db', function (request, response) {
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-      console.log(process.env.DATABASE_URL);
+      
       client.query('SELECT * FROM test_table', function(err, result) {
       done();
+
+      console.log(result.rows[0]);
+
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
-       { response.render('pages/db', {results: result.rows} ); }
+       { response.render('index', {results: result.rows} ); }
     });
   });
 });
