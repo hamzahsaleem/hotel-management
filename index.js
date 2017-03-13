@@ -104,17 +104,66 @@ if (!request.body) return response.sendStatus(400)
 
 
 app.get('/', function (request, response) {
+//   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      
+//       client.query('SELECT * FROM "MENU"', function(err, result) {
+//       done();
+
+//       //console.log(result.rows[0]);
+
+//       if (err)
+//        { console.error(err); response.send("Error " + err); }
+//       else
+//        { response.render('index', {menu: result.rows} ); }
+//     });
+//   });
+
+response.render('test');
+
+});
+
+
+
+//add new dish
+
+app.post('/add_item', urlencodedParser ,function (request, response) {
+
+if (!request.body) return response.sendStatus(400)
+
+
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
-      client.query('SELECT * FROM "MENU"', function(err, result) {
-      done();
+      if(!request.body.dish || !request.body.price || !request.body.type)
+      {
+        response.send("Error in parameters!" );
 
-      //console.log(result.rows[0]);
+      } 
+      else {
+            
+            client.query('INSERT INTO "MENU" (dish,price,type) VALUES(\''+request.body.dish+'\','+request.body.price+',\''+request.body.type+'\')' , function(err, result) {
+            done();
 
-      if (err)
-       { console.error(err); response.send("Error " + err); }
-      else
-       { response.render('index', {menu: result.rows} ); }
+         if (err)
+            { console.error(err); response.send("Error " + err); }
+        else
+            { 
+                pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        
+                    client.query('SELECT * FROM "MENU"', function(err, result) {
+                    done();
+
+                    //console.log(result.rows[0]);
+
+                        if (err)
+                        { console.error(err); response.send("Error " + err); }
+                        else
+                        { response.render('edit_menu', {menu: result.rows} ); }
+                        });
+                    });
+        
+       }
     });
-  });
+   }
+  })
+
 });

@@ -17,7 +17,9 @@
     <link href="/assets/css/business-casual.css" rel="stylesheet">
    
      <link href="/assets/css/site.css" rel="stylesheet">
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
@@ -147,24 +149,36 @@
     </div>
     <!-- /.container -->
 
-<div class = "container">
+<div class = "container" >
+    <div class = "box" >
 
-    <div class = "row">
+    
 
-        <form action="login" method="POST" class = "form">
+        <form action="add_item" method="POST" class = "form">
 
-            <div class="form-group">
-                <label class="text">Dish:</label>
-                <input class="form-control" placeholder="Dish name"   />
+            <div class = "row">
+                <label class="col-lg-1">Dish:</label>
+                <input class="col-lg-2" required="true" minlength="3" placeholder="Dish name" name="dish"  />
+       
+           
+                <label class="col-lg-2">Price in Rs:</label>
+                <input class="col-lg-2" required="true" minlength="2" placeholder="Price" name="price"  />
+
+                <label class="col-lg-2">Select Type:</label>
+
+                <select class="col-lg-2" required="true" style="color:#052483" name="type">
+                        <option value="Breakfast" class="text" >Male</option>
+                        <option value="Lunch" class="text"  >Female</option>
+                        <option value="Dinner" class="text"  >Female</option>
+                </select>
+
             </div>
-
-            <div class="form-group">
-                <label class="text">Price in Rs.:</label>
-                <input class="form-control" placeholder="Price"   />
+            <br />
+             <div class = "row">
+            <input type="submit" style = "margin-left: 35%;" class="btn btn-success btn-lg text col-sm-4"  value="Add"  />
             </div>
-
         
-            <input type="submit" class="btn btn-success btn-lg text col-sm-4"  value="Add"  />
+        
         </form>
 
     </div>
