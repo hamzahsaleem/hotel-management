@@ -201,20 +201,8 @@ if (!request.body) return response.sendStatus(400)
             { console.error(err); response.send("Error " + err); }
         else
             { 
-                pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        
-                    client.query('SELECT * FROM "MENU"', function(err, result) {
-                    done();
-
-                    //console.log(result.rows[0]);
-
-                        if (err)
-                        { console.error(err); response.send("Error " + err); }
-                        else
-                        { response.render('edit_menu', {menu: result.rows} ); }
-                        });
-                    });
-        
+                
+                return response.redirect("/edit_menu");
        }
     });
    }
@@ -260,20 +248,7 @@ if(request.session && request.session.user)
             { console.error(err); response.send("Error " + err); }
         else
             { 
-                pg.connect(process.env.DATABASE_URL, function(err, client, done) {
-        
-                    client.query('SELECT * FROM "MENU"', function(err, result) {
-                    done();
-
-                    //console.log(result.rows[0]);
-
-                        if (err)
-                        { console.error(err); response.send("Error " + err); }
-                        else
-                        { response.render('edit_menu', {menu: result.rows} ); }
-                        });
-                    });
-        
+                return response.redirect("/edit_menu");
        }
     });
    }
