@@ -175,6 +175,7 @@ app.get('/', function (request, response) {
             
             var dealsArray = [];
             var dealsPrices;
+            var menu = result.rows;
 
 
             for(i=0; i<noOfDeals; i++)
@@ -201,6 +202,8 @@ app.get('/', function (request, response) {
             else
             {
                 dealsPrices = result;
+                response.render('index', {menu: menu, noOfDeals:noOfDeals, dealsArray:dealsArray, dealsPrices:result.rows} );
+
 
             }
 
@@ -209,7 +212,7 @@ app.get('/', function (request, response) {
         
         
         
-        response.render('index', {menu: result.rows, noOfDeals:noOfDeals, dealsArray:dealsArray, dealsPrices:dealsPrices.rows} ); }
+     }
     });
   });
 
