@@ -176,12 +176,11 @@
             <%var i =0%>
             <% dealsArray.forEach(function(item){ %>
                 
-             <%i = i+1%>
-
+            
              <div class="col-lg-4">
 
              <div class="table-title">
-             <h2 class="intro-text text-center"><hr><strong>Special Deal#<%=dealsPrices[i-1].id%>  Rs. <%=dealsPrices[i-1].price%></strong><hr></h2>
+             <h2 class="intro-text text-center"><hr><strong>Special Deal#<%=dealsPrices[i].id%>  Rs. <%=dealsPrices[i].price%></strong><hr></h2>
              
              </div>                        
              <table class="table-fill">
@@ -192,7 +191,7 @@
                 </thead>
                 <tbody class="table-hover">
 
-                         <% dealsArray[i-1].forEach(function(item){ %>
+                         <% dealsArray[dealsPrices[i].id -1 ].forEach(function(item){ %>
 
                         <tr>
                             <td><%=item.dish %></td>
