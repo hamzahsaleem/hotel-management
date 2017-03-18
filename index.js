@@ -148,21 +148,21 @@ app.get('/edit_menu', urlencodedParser ,function (request, response) {
 
 
 app.get('/', function (request, response) {
-//   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
-//       client.query('SELECT * FROM "MENU"', function(err, result) {
-//       done();
+      client.query('SELECT * FROM "MENU"', function(err, result) {
+      done();
 
-//       //console.log(result.rows[0]);
+      //console.log(result.rows[0]);
 
-//       if (err)
-//        { console.error(err); response.send("Error " + err); }
-//       else
-//        { response.render('index', {menu: result.rows} ); }
-//     });
-//   });
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { response.render('index', {menu: result.rows} ); }
+    });
+  });
 
-response.render('test');
+//response.render('test');
 
 });
 
