@@ -106,7 +106,7 @@ if (!request.body) return response.sendStatus(400)
 
 ///////////////////////////////////////////////
 
-app.post('/edit_menu', urlencodedParser ,function (request, response) {
+app.get('/edit_menu', urlencodedParser ,function (request, response) {
 
     
     if(request.session && request.session.user)
