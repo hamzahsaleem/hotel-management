@@ -7,6 +7,7 @@ const configJson = fs.readFileSync('./config.json');
 const config = JSON.parse(configJson);
 const bodyParser= require('body-parser')
 const pg = require('pg');
+const session = require('client-sessions');
 
 //module export
 //const firstMod = require('./first-module');
@@ -16,6 +17,17 @@ const app = express();
 
 app.set('view engine', 'ejs');
 app.use('/assets',express.static('assets'));
+
+app.use(session({
+  cookieName: 'session',
+  secret: 'eg[isfd-8yF9-7w2315df{}+Ijsli;;to8',
+  duration: 30 * 60 * 1000,
+  activeDuration: 5 * 60 * 1000,
+  httpOnly: true,
+  secure: true,
+  ephemeral: true
+}));
+
 
 
 // create application/json parser 
@@ -59,18 +71,23 @@ if (!request.body) return response.sendStatus(400)
 
   pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
-      client.query('SELECT * FROM "USER" WHERE user_name = \''+ request.body.username+'\' and password = \''+request.body.password+'\'', function(err, result) {
-      done();
-
-      //console.log(result.rows[0]);
-
       if (err)
-       { console.error(err); response.send("Error " + err); }
+       { 
+           console.error(err); 
+           response.send("Error " + err);
+           done();
+        }
       else
-       { //response.render('index', {menu: result.rows} );
+       { 
          
-        if(result.rowCount == 1)
+         client.query('SELECT * FROM "USER" WHERE user_name = \''+ request.body.username+'\' and password = \''+request.body.password+'\'', function(err, result) {
+         done();
+         
+         if(result.rowCount == 1)
             {
+
+                request.session.user = result.rows[0];
+
                  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
                 client.query('SELECT * FROM "MENU"', function(err, result) {
@@ -90,15 +107,16 @@ if (!request.body) return response.sendStatus(400)
                     return response.redirect("/login");
 
             }
+        
 
+        });
 
-
-
+        
         }
     });
   });
 
-});
+
 
 
 
