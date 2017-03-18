@@ -176,7 +176,7 @@ app.get('/', function (request, response) {
             var dealsArray = [];
 
 
-            for(i=0; i<result.rowCount; i++)
+            for(i=0; i<noOfDeals; i++)
             {
                 dealsArray.push([]);
 
