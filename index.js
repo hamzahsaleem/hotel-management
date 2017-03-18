@@ -182,7 +182,7 @@ if (!request.body) return response.sendStatus(400)
       
       if(!request.body.dish || !request.body.price )
       {
-        response.send("Error in parameters!" );
+        response.send("Error in parameters!" + request.body.dish+ request.body.price );
 
       } 
       else {
