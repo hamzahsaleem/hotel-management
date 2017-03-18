@@ -201,9 +201,7 @@ app.get('/', function (request, response) {
         
         
         
-        
-        
-        response.render('index', {menu: result.rows} ); }
+        response.render('index', {menu: result.rows, noOfDeals:noOfDeals, dealsArray:dealsArray} ); }
     });
   });
 

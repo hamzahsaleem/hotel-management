@@ -226,114 +226,47 @@
             <div class="box">
              <h2 class="intro-text text-center"><hr><strong>Special Deals</strong><hr></h2>
 
+            <%var i =0%>
+            <% dealsArray.forEach(function(item){ %>
+                
+             <%i = i+1%>
 
              <div class="col-lg-4">
 
-                <div class="table-title">
-                <h2 class="intro-text text-center"><hr><strong>Breakfast Menu</strong><hr></h2>
-                </div>
-                <table class="table-fill">
+             <div class="table-title">
+             <h2 class="intro-text text-center"><hr><strong>Special Deal# <%=i%></strong><hr></h2>
+             
+             </div>                        
+             <table class="table-fill">
                 <thead>
-                <tr>
-                <th class="text-left">Dish</th>
-                <th class="text-left">Price (RS.)</th>
-                </tr>
+                    <tr>
+                    <th class="text-left">Dish</th>
+                    <th class="text-left">Price (RS.)</th>
+                    </tr>
                 </thead>
                 <tbody class="table-hover">
-                
-                <% menu.forEach(function(item){ %>
 
-                        <%if(item.type=='Breakfast'){ %>
+                         <% dealsArray[i-1].forEach(function(item){ %>
 
                         <tr>
-                            <td><%=item.dish %></td>
+                            <td><%=item.deal %></td>
                             <td><%=item.price %></td>
                         </tr>
-
-                        <%}%>
 
                         <% }) %>
 
                 </tbody>
-                </table>
+            </table>
   
-                </div>
-
-                <div class="col-lg-4">
-
-                <div class="table-title">
-                 <h2 class="intro-text text-center"><hr><strong>Lunch Menu</strong><hr></h2>
-                </div>
-                <table class="table-fill">
-                <thead>
-                <tr>
-                <th class="text-left">Dish</th>
-                <th class="text-left">Price (RS.)</th>
-                </tr>
-                </thead>
-                <tbody class="table-hover">
-                
-                <% menu.forEach(function(item){ %>
-
-                        <%if(item.type=='Lunch'){ %>
-
-                        <tr>
-                            <td><%=item.dish %></td>
-                            <td><%=item.price %></td>
-                        </tr>
-
-                        <%}%>
-
-                        <% }) %>
-
-                </tbody>
-                </table>
-  
-                </div>
-
-                <div class="col-lg-4">
-
-                <div class="table-title">
-                 <h2 class="intro-text text-center"><hr><strong>Dinner Menu</strong><hr></h2>
-                </div>
-                <table class="table-fill">
-                <thead>
-                <tr>
-                <th class="text-left">Dish</th>
-                <th class="text-left">Price (RS.)</th>
-                </tr>
-                </thead>
-                <tbody class="table-hover">
-                <% menu.forEach(function(item){ %>
-
-                        <%if(item.type=='Dinner'){ %>
-
-                        <tr>
-                            <td><%=item.dish %></td>
-                            <td><%=item.price %></td>
-                        </tr>
-
-                        <%}%>
-
-                        <% }) %>
-                </tbody>
-                </table>
-  
-                </div>
-
-
+            </div>
+            <% }) %>
 
             </div>
         </div>
 
+           
 
-
-
-
-
-        
-
-    </div>
+   </div>
     <!-- /.container -->
 
     <footer>
