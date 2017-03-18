@@ -167,3 +167,52 @@ if (!request.body) return response.sendStatus(400)
   })
 
 });
+
+
+
+
+//update dish price
+
+app.post('/update_price', urlencodedParser ,function (request, response) {
+
+if (!request.body) return response.sendStatus(400)
+
+
+  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      
+      if(!request.body.dish || !request.body.price )
+      {
+        response.send("Error in parameters!" );
+
+      } 
+      else {
+            
+            client.query('UPDATE "MENU" SET price ='+request.body.price+' WHERE dish =\''+request.body.dish+'\'' , function(err, result) {
+            done();
+
+         if (err)
+            { console.error(err); response.send("Error " + err); }
+        else
+            { 
+                pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+        
+                    client.query('SELECT * FROM "MENU"', function(err, result) {
+                    done();
+
+                    //console.log(result.rows[0]);
+
+                        if (err)
+                        { console.error(err); response.send("Error " + err); }
+                        else
+                        { response.render('edit_menu', {menu: result.rows} ); }
+                        });
+                    });
+        
+       }
+    });
+   }
+  })
+
+});
+
+
