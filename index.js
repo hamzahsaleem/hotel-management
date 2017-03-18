@@ -364,7 +364,7 @@ if (!request.body) return response.sendStatus(400)
       } 
       else {
             
-            client.query('UPDATE Deal SET price ='+request.body.price+' WHERE id ='+request.body.id , function(err, result) {
+            client.query('UPDATE Deal SET price ='+request.body.price+' WHERE id ='+request.body.deal , function(err, result) {
             done();
 
          if (err)
