@@ -121,7 +121,7 @@ app.get('/edit_menu', urlencodedParser ,function (request, response) {
                     if (err)
                     { console.error(err); response.send("Error " + err); }
                     else
-                    { response.render('edit_menu', {menu: result.rows, username = request.session.user.user_name } ); }
+                    { response.render('edit_menu', {menu: result.rows, username: request.session.user.user_name } ); }
                     });
                 });
 
