@@ -121,7 +121,7 @@ app.get('/edit_menu', urlencodedParser ,function (request, response) {
                     if (err)
                     { console.error(err); response.send("Error " + err); }
                     else
-                    { response.render('edit_menu', {menu: result.rows} ); }
+                    { response.render('edit_menu', {menu: result.rows, username = request.session.user.user_name } ); }
                     });
                 });
 
@@ -165,6 +165,14 @@ app.get('/', function (request, response) {
 response.render('test');
 
 });
+
+
+app.get('/logout', function (request, response) {
+    request.session.reset()
+    response.render('login');
+
+});
+
 
 
 
