@@ -174,6 +174,7 @@ app.get('/', function (request, response) {
             console.log("Deals = "+noOfDeals);
             
             var dealsArray = [];
+            var dealsPrices;
 
 
             for(i=0; i<noOfDeals; i++)
@@ -182,7 +183,6 @@ app.get('/', function (request, response) {
 
             }
 
-            console.log("Before"+dealsArray);
 
             for(i=0; i<result.rowCount; i++)
             {
@@ -193,15 +193,23 @@ app.get('/', function (request, response) {
                     }      
             }
 
-            console.log("After"+dealsArray[0]);
-            console.log("After"+dealsArray[1]);
-            console.log("After"+dealsArray[2]);
+           client.query('SELECT * FROM Deal', function(err, result) {
+           done();
 
+           if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+            {
+                dealsPrices = result;
+
+            }
+
+           });
            
         
         
         
-        response.render('index', {menu: result.rows, noOfDeals:noOfDeals, dealsArray:dealsArray} ); }
+        response.render('index', {menu: result.rows, noOfDeals:noOfDeals, dealsArray:dealsArray, dealsPrices:dealsPrices.rows} ); }
     });
   });
 
