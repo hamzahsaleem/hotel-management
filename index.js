@@ -114,16 +114,74 @@ app.get('/edit_menu', urlencodedParser ,function (request, response) {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
                 client.query('SELECT * FROM "MENU"', function(err, result) {
-                done();
+      done();
 
-                //console.log(result.rows[0]);
+      if (err)
+       { console.error(err); response.send("Error " + err); }
+      else
+       { 
+           var i;
+           var deal_list = [];
+           for(i=0; i<result.rowCount; i++)
+            {
+                if(result.rows[i].deal)
+                    {
+                        deal_list.push(result.rows[i].deal);
 
-                    if (err)
-                    { console.error(err); response.send("Error " + err); }
-                    else
-                    { response.render('edit_menu', {menu: result.rows, username: request.session.user.user_name } ); }
-                    });
+                    }        
+            }
+
+            deal_list.reverse();
+
+            var noOfDeals = deal_list[0];
+
+            console.log("Deals = "+noOfDeals);
+            
+            var dealsArray = [];
+            var dealsPrices;
+            var menu = result.rows;
+
+
+            for(i=0; i<noOfDeals; i++)
+            {
+                dealsArray.push([]);
+
+            }
+
+
+            for(i=0; i<result.rowCount; i++)
+            {
+                if(result.rows[i].deal)
+                    {
+                        dealsArray[result.rows[i].deal - 1].push(result.rows[i]);
+
+                    }      
+            }
+
+           client.query('SELECT * FROM Deal', function(err, result) {
+           done();
+
+           if (err)
+            { console.error(err); response.send("Error " + err); }
+            else
+            {
+                dealsPrices = result;
+                response.render('edit_menu', {menu: menu, username: request.session.user.user_name, noOfDeals:noOfDeals, dealsArray:dealsArray, dealsPrices:result.rows} );
+
+
+            }
+
+           });
+           
+        
+        
+        
+     }
+    });
+
                 });
+
+
 
 
     }
@@ -221,6 +279,20 @@ app.get('/', function (request, response) {
 });
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 app.get('/logout', function (request, response) {
     request.session.reset()
     response.render('login');
@@ -274,6 +346,53 @@ if (!request.body) return response.sendStatus(400)
 
 
 });
+
+
+app.post('/update_price_deal', urlencodedParser ,function (request, response) {
+
+if (!request.body) return response.sendStatus(400)
+
+
+     if(request.session && request.session.user)
+    {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+      
+      if(!request.body.dish || !request.body.price || !request.body.type)
+      {
+        response.send("Error in parameters!" );
+
+      } 
+      else {
+            
+            client.query('UPDATE Deal SET price ='+request.body.price+' WHERE id ='+request.body.id , function(err, result) {
+            done();
+
+         if (err)
+            { console.error(err); response.send("Error " + err); }
+        else
+            { 
+                
+                return response.redirect("/edit_menu");
+       }
+    });
+   }
+  });
+
+
+    }
+    else
+    {
+        request.session.reset();
+        return response.redirect("/login");
+
+
+    }
+
+
+});
+
+
+
 
 
 
