@@ -87,8 +87,31 @@ if (!request.body) return response.sendStatus(400)
             {
 
                 request.session.user = result.rows[0];
+                response.render('admin_home', {username: request.session.user.user_name} ); 
+               
+            } else {
 
-                 pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+                return response.redirect("/login");
+
+            }
+        
+
+        });
+
+        
+        }
+    });
+  });
+
+
+///////////////////////////////////////////////
+
+app.post('/edit_menu', urlencodedParser ,function (request, response) {
+
+    
+    if(request.session && request.session.user)
+    {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
                 client.query('SELECT * FROM "MENU"', function(err, result) {
                 done();
@@ -102,23 +125,26 @@ if (!request.body) return response.sendStatus(400)
                     });
                 });
 
-            } else {
 
-                    return response.redirect("/login");
+    }
+    else
+    {
+        request.session.reset();
+        return response.redirect("/login");
 
-            }
-        
 
-        });
+    }
 
-        
-        }
-    });
+
+
+  
   });
 
 
 
+ 
 
+/////////////////////////////////////////////
 
 
 app.get('/', function (request, response) {
