@@ -104,7 +104,7 @@ if (!request.body) return response.sendStatus(400)
   });
 
 
-///////////////////////////////////////////////
+
 
 app.get('/edit_menu', urlencodedParser ,function (request, response) {
 
@@ -144,7 +144,7 @@ app.get('/edit_menu', urlencodedParser ,function (request, response) {
 
  
 
-/////////////////////////////////////////////
+
 
 
 app.get('/', function (request, response) {
@@ -175,7 +175,9 @@ app.post('/add_item', urlencodedParser ,function (request, response) {
 if (!request.body) return response.sendStatus(400)
 
 
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+     if(request.session && request.session.user)
+    {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
       if(!request.body.dish || !request.body.price || !request.body.type)
       {
@@ -208,7 +210,18 @@ if (!request.body) return response.sendStatus(400)
        }
     });
    }
-  })
+  });
+
+
+    }
+    else
+    {
+        request.session.reset();
+        return response.redirect("/login");
+
+
+    }
+
 
 });
 
@@ -221,8 +234,9 @@ app.post('/update_price', urlencodedParser ,function (request, response) {
 
 if (!request.body) return response.sendStatus(400)
 
-
-  pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+if(request.session && request.session.user)
+    {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
       if(!request.body.dish || !request.body.price )
       {
@@ -255,8 +269,20 @@ if (!request.body) return response.sendStatus(400)
        }
     });
    }
-  })
+  });
 
+    }
+    else
+    {
+        request.session.reset();
+        return response.redirect("/login");
+
+
+    }
+
+
+
+  
 });
 
 
