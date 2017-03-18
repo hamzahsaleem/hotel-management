@@ -142,7 +142,6 @@ app.get('/edit_menu', urlencodedParser ,function (request, response) {
 
 
 
- 
 
 
 
@@ -153,12 +152,56 @@ app.get('/', function (request, response) {
       client.query('SELECT * FROM "MENU"', function(err, result) {
       done();
 
-      //console.log(result.rows[0]);
-
       if (err)
        { console.error(err); response.send("Error " + err); }
       else
-       { response.render('index', {menu: result.rows} ); }
+       { 
+           var i;
+           var deal_list = [];
+           for(i=0; i<result.rowCount; i++)
+            {
+                if(result.rows[i].deal)
+                    {
+                        deal_list.push(result.rows[i].deal);
+
+                    }        
+            }
+
+            deal_list.reverse();
+
+            var noOfDeals = deal_list[0];
+
+            console.log("Deals = "+noOfDeals);
+            
+            var dealsArray = [];
+
+
+            for(i=0; i<result.rowCount; i++)
+            {
+                dealsArray.push([]);
+
+            }
+
+            console.log("Before"+dealsArray);
+
+            for(i=0; i<result.rowCount; i++)
+            {
+                if(result.rows[i].deal)
+                    {
+                        dealsArray[result.rows[i].deal - 1].push(result.rows[i]);
+
+                    }      
+            }
+
+            console.log("After"+dealsArray);
+
+           
+        
+        
+        
+        
+        
+        response.render('index', {menu: result.rows} ); }
     });
   });
 
