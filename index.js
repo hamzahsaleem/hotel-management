@@ -357,7 +357,7 @@ if (!request.body) return response.sendStatus(400)
     {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
       
-      if(!request.body.dish || !request.body.price || !request.body.type)
+      if(!request.body.deal || !request.body.price )
       {
         response.send("Error in parameters!" );
 
