@@ -193,7 +193,9 @@ app.get('/', function (request, response) {
                     }      
             }
 
-            console.log("After"+dealsArray);
+            console.log("After"+dealsArray[0]);
+            console.log("After"+dealsArray[1]);
+            console.log("After"+dealsArray[2]);
 
            
         
