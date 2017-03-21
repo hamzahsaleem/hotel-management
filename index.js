@@ -396,7 +396,7 @@ if (!request.body) return response.sendStatus(400)
 // add a deal
 app.post('/add_deal', urlencodedParser ,function (request, response) {
 
-if (!request.body) return response.sendStatus(400)
+if (!request.body) return response.send("System" );
 
 
      if(request.session && request.session.user)
