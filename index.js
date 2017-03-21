@@ -393,6 +393,113 @@ if (!request.body) return response.sendStatus(400)
 
 
 
+// add a deal
+app.post('/add_deal', urlencodedParser ,function (request, response) {
+
+if (!request.body) return response.sendStatus(400)
+
+
+     if(request.session && request.session.user)
+    {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+
+        dishes = [];
+        
+        if(request.body.dish1 && request.body.dish1 != 'none')
+        {
+            dishes.push(request.body.dish1);
+        }
+        
+        if(request.body.dish2 && request.body.dish2 != 'none')
+        {
+            dishes.push(request.body.dish2);
+        }
+
+        if(request.body.dish3 && request.body.dish3 != 'none')
+        {
+            dishes.push(request.body.dish3);
+        }
+
+        if(request.body.dish4 && request.body.dish4 != 'none')
+        {
+            dishes.push(request.body.dish4);
+        }
+
+        if(request.body.dish5 && request.body.dish5 != 'none')
+        {
+            dishes.push(request.body.dish5);
+        }
+
+
+
+      if(!request.body.price || dishes.length<2)
+      {
+        response.send("Error in parameters!" );
+
+      } 
+      else {
+
+            client.query('Insert into Deal(price) Values('+request.body.price+') RETURNING id' , function(err, result) {
+            done();
+
+         if (err)
+            { console.error(err); response.send("Error " + err); }
+        else
+            { 
+            
+            id = result.rows.id;
+            console.log("id = "+ id);
+
+
+            var query = 'UPDATE "MENU" SET deal ='+id+' where ';
+
+            var j;
+
+            query = query + 'dish = \''+dishes[0]+'\'';
+
+            for(j=1;j<dishes.length;j++)
+            {
+                query = query + ' or dish = \''+dishes[j]+'\'';
+            }            
+            console.log(query);
+                
+            client.query(query , function(err, result) {
+            done();
+            
+         if (err)
+            { console.error(err); response.send("Error " + err); }
+        else
+            { 
+                return response.redirect("/edit_menu");
+            }
+    
+    
+    });
+
+                
+            }
+    });
+
+
+
+   }
+  });
+
+
+    }
+    else
+    {
+        request.session.reset();
+        return response.redirect("/login");
+
+
+    }
+
+
+});
+
+
+
 
 
 
