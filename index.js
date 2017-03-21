@@ -449,10 +449,10 @@ if (!request.body) return response.sendStatus(400)
         else
             { 
             
-            console.log("result = "+ result.rows[0]);
+            console.log("result = "+ result.rows[0].id);
             console.log("result = "+ result.rowCount);
 
-            var id = result.rows.id;
+            var id = result.rows[0].id;
             console.log("id = "+ id);
 
 
