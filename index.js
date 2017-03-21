@@ -505,6 +505,71 @@ if (!request.body) return response.sendStatus(400)
 
 
 
+//delete a deal
+
+
+
+app.post('/delete_deal', urlencodedParser ,function (request, response) {
+
+if (!request.body) return response.sendStatus(400)
+
+
+     if(request.session && request.session.user)
+    {
+        pg.connect(process.env.DATABASE_URL, function(err, client, done) {
+
+      if(!request.body.deal)
+      {
+        response.send("Error in parameters!" );
+
+      } 
+      else {
+
+            client.query('Delete from Deal where id = '+request.body.deal , function(err, result) {
+            done();
+
+         if (err)
+            { console.error(err); response.send("Error " + err); }
+        else
+            { 
+            
+            var query = 'UPDATE "MENU" SET deal = NULL where deal = '+request.body.deal;
+     
+            client.query(query , function(err, result) {
+            done();
+            
+         if (err)
+            { console.error(err); response.send("Error " + err); }
+        else
+            { 
+                return response.redirect("/edit_menu");
+            }
+    
+    
+    });
+
+                
+            }
+    });
+
+
+
+   }
+  });
+
+
+    }
+    else
+    {
+        request.session.reset();
+        return response.redirect("/login");
+
+
+    }
+
+
+});
+
 
 
 
