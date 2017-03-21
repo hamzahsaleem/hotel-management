@@ -449,7 +449,7 @@ if (!request.body) return response.sendStatus(400)
         else
             { 
             
-            id = result.rows.id;
+            var id = result.rows.id;
             console.log("id = "+ id);
 
 
