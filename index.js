@@ -400,12 +400,12 @@ console.log("inside");
 if (!request.body) return response.sendStatus(400)
 
     console.log("inside");
+     var dishes = [];
 
      if(request.session && request.session.user)
     {
         pg.connect(process.env.DATABASE_URL, function(err, client, done) {
 
-        dishes = [];
         
         if(request.body.dish1 && request.body.dish1 != 'none')
         {
