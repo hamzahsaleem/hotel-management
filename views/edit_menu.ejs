@@ -320,8 +320,8 @@
 
            <div class = "row">
                 <label class="col-lg-1">Dish: 1</label>
-                <select class="col-lg-2" name ="deal1" required="true" style="color:#052483" >
-                       
+                <select class="col-lg-2" name ="dish1" required="true" style="color:#052483" >
+                       <option value="none" class="text" >None %></option>
 
                        <% menu.forEach(function(item){ %>
 
@@ -335,9 +335,9 @@
 
 
                 <div class = "row">
-                <label class="col-lg-1">Dish: 1</label>
-                <select class="col-lg-2" name ="deal2" required="true" style="color:#052483" >
-                       
+                <label class="col-lg-1">Dish: 2</label>
+                <select class="col-lg-2" name ="dish2" required="true" style="color:#052483" >
+                       <option value="none" class="text" >None %></option>
 
                        <% menu.forEach(function(item){ %>
 
@@ -351,10 +351,26 @@
 
 
                 <div class = "row">
-                <label class="col-lg-1">Dish: 1</label>
-                <select class="col-lg-2" name ="deal3" required="true" style="color:#052483" >
+                <label class="col-lg-1">Dish: 3</label>
+                <select class="col-lg-2" name ="dish3" required="true" style="color:#052483" >
                        
+                        <option value="none" class="text" >None %></option>
+                       <% menu.forEach(function(item){ %>
 
+                        <option value="<%=item.dish %>" class="text" ><%=item.dish %></option>
+                        
+                        <% }) %>
+                        
+
+                </select>
+                </div>
+
+
+                <div class = "row">
+                <label class="col-lg-1">Dish: 4</label>
+                <select class="col-lg-2" name ="dish4" required="true" style="color:#052483" >
+                       
+                        <option value="none" class="text" >None %></option>
                        <% menu.forEach(function(item){ %>
 
                         <option value="<%=item.dish %>" class="text" ><%=item.dish %></option>
@@ -369,12 +385,27 @@
 
 
 
+
+                <div class = "row">
+                <label class="col-lg-1">Dish: 5</label>
+                <select class="col-lg-2" name ="dish5" required="true" style="color:#052483" >
+                       
+                        <option value="none" class="text" >None %></option>
+                       <% menu.forEach(function(item){ %>
+
+                        <option value="<%=item.dish %>" class="text" ><%=item.dish %></option>
+                        
+                        <% }) %>
+                        
+
+                </select>
+                </div>
 
 
 
                  <div class = "row">
-                <label class="col-lg-2" style="margin-left:20px;">Price (Rs):</label>
-                <input class="col-lg-2" placeholder="Price" name="price" required="true" minlength="2" type = "number"   />
+                <label class="col-lg-1" style="margin-left:20px;">Price (Rs):</label>
+                <input class="col-lg-1" placeholder="Price" name="price" required="true" minlength="2" type = "number"   />
 
                 
                 
